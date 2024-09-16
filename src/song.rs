@@ -1,4 +1,4 @@
-use id3::{frame::Picture, Tag, Timestamp};
+use id3::{frame::Picture, Tag, TagLike, Timestamp};
 use reqwest::Client;
 use serde::Deserialize;
 use std::{fs::File, io::Write, path::Path, str::FromStr};
@@ -54,7 +54,7 @@ impl Song {
         metadata: SongMetadata,
         downloader: &Downloader,
     ) -> anyhow::Result<Song> {
-        log::debug!("started download {}",metadata.id);
+        log::debug!("started download {}", metadata.id);
 
         let raw_data = downloader.dowload_raw_song_data(metadata.id).await?;
         let cover = downloader
@@ -66,7 +66,7 @@ impl Song {
             .await?
             .to_vec();
 
-        log::debug!("finished download {}",metadata.id);
+        log::debug!("finished download {}", metadata.id);
         Song::from_raw_data_and_metadata(raw_data, metadata, cover).await
     }
 
@@ -84,7 +84,7 @@ impl Song {
             tag.set_date_released(Timestamp::from_str(release_date)?);
             tag.set_date_recorded(Timestamp::from_str(release_date)?);
         }
-        tag.add_picture(Picture {
+        tag.add_frame(Picture {
             mime_type: "image/jpeg".to_string(),
             picture_type: id3::frame::PictureType::CoverFront,
             description: "front cover".to_string(),

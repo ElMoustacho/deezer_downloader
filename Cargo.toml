@@ -2,37 +2,23 @@
 name = "deezer_downloader"
 version = "0.1.0"
 edition = "2021"
-authors = ["zggff<gigamaximwachau@gmail.com>"]
+authors = ["zggff<gigamaximwachau@gmail.com>", "ElMoustacho"]
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/zggff/deezer_downloader"
+repository = "https://github.com/ElMoustacho/deezer_downloader"
 readme = "README.md"
 keywords = ["deezer", "downloader"]
 description = "crate to download music from deezer"
 
-[features]
-binary = ["clap", "env_logger", "futures"]
-
 [dependencies]
-reqwest = { version = "0.11.7", features = ["json", "cookies"] }
-serde = { version = "1.0.130", features = ["derive"] }
-serde_json = "1.0.72"
+reqwest = { version = "0.12.7", features = ["json", "cookies"] }
+serde = { version = "1.0.210", features = ["derive"] }
+serde_json = "1.0.128"
 md5 = "0.7.0"
 hex = "0.4.3"
-hex-literal = "0.3.4"
+hex-literal = "0.4.1"
 block-modes = "0.8.1"
 blowfish = "0.8.0"
-id3 = "0.6.6"
-tokio = { version = "1.23.0", features = ["full"] }
-anyhow = "1.0.68"
-log = "0.4.17"
-indicatif = "0.17.7"
-
-# binary dependencies
-clap = { version = "4.0.30", features = ["derive"], optional = true }
-env_logger = { version = "0.10.0", optional = true }
-futures = { version = "0.3.25", optional = true }
-
-
-[[bin]]
-name = "deezer_downloader"
-required-features = ["binary"]
+id3 = "1.14.0"
+tokio = { version = "1.40.0", features = ["full"] }
+anyhow = "1.0.89"
+log = "0.4.22"
